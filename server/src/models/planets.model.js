@@ -1,4 +1,3 @@
-
 const planets = [];
 
 module.exports = {
