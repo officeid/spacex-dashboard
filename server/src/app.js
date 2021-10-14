@@ -11,6 +11,4 @@ app.use(cors({
 app.use(express.json());
 app.use(planetRouters);
 
-module.exports = {
-    app
-};
+module.exports = app;

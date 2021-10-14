@@ -27,9 +27,9 @@ function loadPlanets(){
         reject(err);
     })
     .on('end', ()=>{
-        // console.log( results.map(planet => {
+        // results.map(planet => {
         //   return planet['kepoi_name']
-        // }));
+        // });
         console.log('Possible Habitable Planets: '+ results.length);
         console.log("DONE!!");
         resolve();
