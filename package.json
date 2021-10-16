@@ -7,11 +7,16 @@
     "server": "npm run watch --prefix server",
     "client": "npm run watch --prefix client",
     "watch": "npm run server & npm run client",
+    "concurrent" : "concurrently \"npm run server\" \"npm run client\"",
     "install-server": "npm install --prefix server",
     "install-client": "npm install --prefix client",
     "install": "npm run install-server && npm run install-client",
+    "deploy" : "npm run build --prefix client && npm start --prefix server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.3.0"
+  }
 }
