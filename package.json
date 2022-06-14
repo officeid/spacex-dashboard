@@ -12,6 +12,7 @@
     "install": "npm run install-server && npm run install-client",
     "start": "npm run client & npm run server",
     "deploy" : "npm run build --prefix client && npm start --prefix server",
+    "deploy-cluster" : "npm run build --prefix client && npm run cluster --prefix server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
