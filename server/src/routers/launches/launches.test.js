@@ -1,12 +1,19 @@
 const request = require('supertest');
 const app = require('../../app');
-const {connectMongo} = require('../../services/mongo');
+const {
+    connectMongo,
+    disconnectMongo,
+} = require('../../services/mongo');
 
 
 describe('API TEST', ()=>{
 
     beforeAll( async () =>{
         await connectMongo();
+    });
+
+    afterAll( async () =>{
+        await disconnectMongo();
     });
 
     describe('TEST GET /launches', ()=> {
@@ -22,20 +29,20 @@ describe('API TEST', ()=>{
         mission: 'Kepler',
         rocket: 'Explorer',
         launchDate : 'December 27, 2022',
-        target: 'Kepler 2',
+        target: 'Kepler-1652 b',
     }
     
     const dataWithInvalidDate = {
         mission: 'Kepler',
         rocket: 'Explorer',
         launchDate : 'December',
-        target: 'Kepler 2',
+        target: 'Kepler-1652 b',
     }
     
     const completeWithoutDate = {
         mission: 'Kepler',
         rocket: 'Explorer',
-        target: 'Kepler 2',
+        target: 'Kepler-1652 b',
     }
     
     describe('TEST POST /launches', ()=>{
