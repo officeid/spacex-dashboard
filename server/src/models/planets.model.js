@@ -1,7 +1,9 @@
 const parse = require('csv-parse');
 const fs = require('fs');
 
-let results = [];
+const planetsModel = require('./planets.mongo');
+
+// let habitablePlanets = [];
 
 const isHabitable = (planet) => {
   return planet['koi_disposition'] === 'CONFIRMED'
@@ -17,27 +19,48 @@ function loadPlanets(){
       comment: '#',
       columns: true,
     }))
-    .on('data', (data) => {
+    .on('data', async (data) => {
       if (isHabitable(data)) {
-        results.push(data);
+        // habitablePlanets.push(data);
+         await savePlanet(data);
       }
     })
     .on('error', (err)=>{
         console.log(err);
         reject(err);
     })
-    .on('end', ()=>{
-        // results.map(planet => {
-        //   return planet['kepoi_name']
-        // });
-        console.log('Possible Habitable Planets: '+ results.length);
-        console.log("DONE!!");
+    .on('end', async ()=>{
+        const planetsCount = (await getAllPlanets()).length;
+        console.info('Possible Habitable Planets: '+ planetsCount);
         resolve();
     });
     });
 }
 
+async function getAllPlanets() {
+  // return habitablePlanets;
+  return await planetsModel.find({},{
+    '_id':0,
+    '__v':0
+  });
+}
+
+async function savePlanet(planet) {
+  try {
+    await planetsModel.updateOne({
+      keplerName: planet.kepler_name,
+    }, {
+      keplerName: planet.kepler_name,
+    }, {
+      upsert: true,
+    }
+    );
+  } catch (error) {
+    console.error('Could not save planets.');
+  }
+}
+
 module.exports = {
     loadPlanets : loadPlanets,
-    planets : results
+    getAllPlanets,
 };
