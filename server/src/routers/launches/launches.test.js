@@ -19,7 +19,7 @@ describe('API TEST', ()=>{
     describe('TEST GET /launches', ()=> {
         test('It should respond with 200 success', async ()=>{
             const response = await request(app)
-                .get('/launches')
+                .get('/v1/launches')
                 .expect('Content-type', /json/)
                 .expect(200);
         });
@@ -48,7 +48,7 @@ describe('API TEST', ()=>{
     describe('TEST POST /launches', ()=>{
         test('It should respond with 201 created', async()=>{
             const response= await request(app)
-                .post('/launches')
+                .post('/v1/launches')
                 .send(completeData)
                 .expect('Content-type',/json/)
                 .expect(201);
@@ -63,7 +63,7 @@ describe('API TEST', ()=>{
     
         test('It should catch missing properties',async ()=>{
             const response= await request(app)
-                .post('/launches')
+                .post('/v1/launches')
                 .send(completeWithoutDate)
                 .expect('Content-type',/json/)
                 .expect(400);
@@ -75,7 +75,7 @@ describe('API TEST', ()=>{
     
         test('It should invalid launch date',async ()=>{
             const response= await request(app)
-                .post('/launches')
+                .post('/v1/launches')
                 .send(dataWithInvalidDate)
                 .expect('Content-type',/json/)
                 .expect(400);
