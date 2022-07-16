@@ -5,11 +5,16 @@ const {
     disconnectMongo,
 } = require('../../services/mongo');
 
+const {
+    loadLaunches
+} = require('../../models/launches.model');
+
 
 describe('API TEST', ()=>{
 
     beforeAll( async () =>{
         await connectMongo();
+        await loadLaunches();
     });
 
     afterAll( async () =>{
