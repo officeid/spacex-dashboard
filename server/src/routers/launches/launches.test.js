@@ -15,6 +15,7 @@ describe('API TEST', ()=>{
     beforeAll( async () =>{
         await connectMongo();
         await loadLaunches();
+        await loadPlanets();
     });
 
     afterAll( async () =>{
