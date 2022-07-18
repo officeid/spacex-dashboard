@@ -9,6 +9,10 @@ const {
     loadLaunches
 } = require('../../models/launches.model');
 
+const {
+    loadPlanets
+} = require('../../models/planets.model');
+
 
 describe('API TEST', ()=>{
 
