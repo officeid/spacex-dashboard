@@ -5,11 +5,21 @@ const {
     disconnectMongo,
 } = require('../../services/mongo');
 
+const {
+    loadLaunches
+} = require('../../models/launches.model');
+
+const {
+    loadPlanets
+} = require('../../models/planets.model');
+
 
 describe('API TEST', ()=>{
 
     beforeAll( async () =>{
         await connectMongo();
+        await loadLaunches();
+        await loadPlanets();
     });
 
     afterAll( async () =>{
